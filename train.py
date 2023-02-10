@@ -9,7 +9,7 @@ def train1Epoch(epoch_index, model, optimizer, loss_fn, training_loader, writer=
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     losses = np.array([])
 
-    for i, (image, bnpp) in tqdm(
+    for i, (image, bnpp, _) in tqdm(
         enumerate(training_loader), total=len(training_loader)
     ):
         image, bnpp = image.to(device, non_blocking=True), bnpp.to(
@@ -34,7 +34,7 @@ def test1Epoch(epoch_index, model, loss_fn, valid_loader, tb_writer=None):
     losses = np.array([])
 
     with torch.no_grad():
-        for i, (image, bnpp) in tqdm(enumerate(valid_loader), total=len(valid_loader)):
+        for i, (image, bnpp, _) in tqdm(enumerate(valid_loader), total=len(valid_loader)):
             image, bnpp = image.to(device, non_blocking=True), bnpp.to(
                 device, non_blocking=True
             )
