@@ -1,5 +1,5 @@
-# DSC-180B
-Project
+# DSC-180B <br>
+Project <br>
 ├── run.py             <- run.py with calls to functions in src.<br>
 ├── README.md          <- The top-level README for developers using this project.<br>
 ├── data<br>
