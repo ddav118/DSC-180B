@@ -16,7 +16,7 @@ LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 USER root
 RUN apt-get update && \
     apt-get upgrade -y
-RUN pip install --no-cache-dir -r requirements.txt
+# RUN pip install --no-cache-dir -r requirements.txt
 # RUN apt-get -y install aria2 nmap traceroute
 
 # 3) install packages using notebook user
