@@ -2,10 +2,7 @@
 Project <br>
 ├── run.py             <- run.py with calls to functions in src.<br>
 ├── README.md          <- The top-level README for developers using this project.<br>
-├── data<br>
-   ├── temp           <- Intermediate data that has been transformed.<br>
-   ├── out            <- The final, canonical data sets for modeling.<br>
-├── notebooks          <- Jupyter notebooks (presentation only).<br>
+├── data               <- <br>
 ├── models             <- <br>
 ├── 1 - Preprocessing.ipynb<br>
 ├── 2 - Predicting Unannotated.ipynb<br>
