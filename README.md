@@ -1,4 +1,4 @@
-# DSC-180B <br>
+# UC San Diego, DSC-180B, Winter 2023 <br>
 Predicting Pulmonary Edema Using Deep Learning and Image Segmentation <br>
 Team Members: David Davila-Garcia, Marco Morocho, Yash Potdar
 
