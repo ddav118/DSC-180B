@@ -5,6 +5,8 @@ Team Members: David Davila-Garcia, Marco Morocho, Yash Potdar
 Note: All data was deidentified but is not publicly available
 
 ├── README.md          <- The top-level README for developers using this project.<br>
+├── Final_Report.pdf
+├── Final_Poster.pdf
 ├── models             <- Contains the outputs from trained models: Losses and Test Set Predictions<br>
 │   ├── Losses         <- Training and Validation MAE Losses by Epoch.<br>
 │   ├── Test Set Preds <- NT-proBNP predictions on test set using the best model (minimize MAE valid loss).<br>
@@ -15,3 +17,5 @@ Note: All data was deidentified but is not publicly available
 ├── 5 - CNN Models.ipynb                                  <- Contains all code for training and testing models. <br>
 ├── model.py           <- Contains modified ResNet152 architectures, extends the Pytorch ResNet152 implementation <br>
 ├── train.py           <- Contains model training and testing functions; different inputs called for different architectures<br>
+
+
