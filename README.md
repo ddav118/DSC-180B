@@ -17,9 +17,9 @@ Project <br>
 &nbsp;&nbsp;&nbsp;&nbsp;    │   └── train_model.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;    └── visualization  <- Scripts to create exploratory and results-oriented viz.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;        └── visualize.py<br>
-├── 1 - Preprocessing.ipynb<br>        
-├── 2 - Predicting Unannotated.ipynb<br>       
-├── 2 - Transfer Learning Training & Evaluation.ipynb<br>   
+├── 1 - Preprocessing.ipynb<br>
+├── 2 - Predicting Unannotated.ipynb<br>
+├── 2 - Transfer Learning Training & Evaluation.ipynb<br>
 ├── 3 - Checking Data.ipynb<br>
 ├── 4 - Checking Data.ipynb<br>
 ├── 4 - Creating Masks.ipynb<br>
