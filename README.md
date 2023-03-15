@@ -8,6 +8,6 @@ Project <br>
 ├── 3 - Predicting Unannotated.ipynb<br>
 ├── 4 - Creating Masks.ipynb<br>
 ├── 5 - CNN Models.ipynb<br>
-├── model.py           <- <br>
-├── train.py          <- <br>
+├── model.py           <- Contains the functions used to train our ResNet models <br>
+├── train.py           <- Includes our VanillaResNet and ResNet152 models built using torchvision <br>
 
