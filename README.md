@@ -14,3 +14,6 @@ Project <br>
 ├── 5 - Creating Masks.ipynb<br>
 ├── 6 - CNN Models.ipynb<br>
 ├── CXR_model.json
+├── model.py           <- <br>
+├── train.pu           <- <br>
+
