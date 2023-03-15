@@ -6,126 +6,64 @@ from torchvision import transforms
 from torchvision import datasets
 import matplotlib.pyplot as plt
 import numpy as np
-
-cfg = {
-    "VGG11": [64, "M", 128, "M", 256, 256, "M", 512, 512, "M", 512, 512, "M"],
-    "VGG13": [64, 64, "M", 128, 128, "M", 256, 256, "M", 512, 512, "M", 512, 512, "M"],
-    "VGG16": [
-        64,
-        64,
-        "M",
-        128,
-        128,
-        "M",
-        256,
-        256,
-        256,
-        "M",
-        512,
-        512,
-        512,
-        "M",
-        512,
-        512,
-        512,
-        "M",
-    ],
-    "VGG19": [
-        64,
-        64,
-        "M",
-        128,
-        128,
-        "M",
-        256,
-        256,
-        256,
-        256,
-        "M",
-        512,
-        512,
-        512,
-        512,
-        "M",
-        512,
-        512,
-        512,
-        512,
-        "M",
-    ],
-}
+from torch import Tensor
+from typing import Type
+import torchvision.models as models
+from torchvision.models import ResNet152_Weights
 
 
-class VGG(nn.Module):
-    def __init__(self, vgg_name):
-        super(VGG, self).__init__()
-        self.features = self._make_layers(cfg[vgg_name])
+class VanillaResNet(nn.Module):
+    def __init__(self, num_classes, input_channels=3):
+        super(VanillaResNet, self).__init__()
+        self.resnet = models.resnet152(weights=ResNet152_Weights.DEFAULT)
+        self.resnet.conv1 = nn.Conv2d(
+            input_channels, 64, kernel_size=7, stride=2, padding=3, bias=False
+        )
+        self.resnet.fc = nn.Linear(self.resnet.fc.in_features, num_classes)
 
-        # self.features_conv = self.features[:40]
+    def forward(self, images: Tensor) -> Tensor:
+        x = self.resnet.conv1(images)
+        x = self.resnet.bn1(x)
+        x = self.resnet.relu(x)
+        x = self.resnet.maxpool(x)
+        x = self.resnet.layer1(x)
+        x = self.resnet.layer2(x)
+        x = self.resnet.layer3(x)
+        x = self.resnet.layer4(x)
+        # The spatial dimension of the final layer's feature
+        # map should be (7, 7) for all ResNets.
 
-        self.linear_layers = nn.Sequential(
-            nn.Flatten(),
-            nn.Linear(in_features=32768, out_features=500),
-            nn.LeakyReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(in_features=500, out_features=500),
-            nn.LeakyReLU(),
-            nn.Dropout(0.5),
-            nn.Linear(in_features=500, out_features=1),
+        x = self.resnet.avgpool(x)
+        x = x.view(x.size(0), -1)
+        x = self.resnet.fc(x)
+        return x
+
+
+class ResNet152(nn.Module):
+    def __init__(self, num_classes, input_channels=3, data_features=4):
+        super(ResNet152, self).__init__()
+        self.resnet = models.resnet152(weights=ResNet152_Weights.DEFAULT)
+        self.resnet.conv1 = nn.Conv2d(
+            input_channels, 64, kernel_size=7, stride=2, padding=3, bias=False
+        )
+        self.resnet.fc = nn.Linear(
+            self.resnet.fc.in_features + data_features, num_classes
         )
 
-    def forward(self, x):
-        out = self.features(x)  # conv layers
-        out = self.linear_layers(out)  # fully-connected layers
-        return out
-
-    def _make_layers(self, cfg):
-        layers = []
-        in_channels = 3
-        for x in cfg:
-            if x == "M":
-                layers += [nn.MaxPool2d(kernel_size=2, stride=2)]
-            else:
-                layers += [
-                    nn.Conv2d(in_channels, x, kernel_size=3, padding=1, bias=False),
-                    nn.BatchNorm2d(x),
-                    nn.LeakyReLU(),
-                ]
-                in_channels = x
-        return nn.Sequential(*layers)
-
-
-class ResNet(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.gradients = None
-        self.tensorhook = []
-        self.layerhook = []
-        self.selected_out = None
-
-        # PRETRAINED MODEL
-        self.pretrained = resnet152(pretrained=True)
-        self.pretrained.fc = nn.Linear(in_features=2048, out_features=1, bias=True)
-        self.layerhook.append(
-            self.pretrained.layer4.register_forward_hook(self.forward_hook())
-        )
-
-        for p in self.pretrained.parameters():
-            p.requires_grad = True
-
-    def activations_hook(self, grad):
-        self.gradients = grad
-
-    def get_act_grads(self):
-        return self.gradients
-
-    def forward_hook(self):
-        def hook(module, inp, out):
-            self.selected_out = out
-            self.tensorhook.append(out.register_hook(self.activations_hook))
-
-        return hook
-
-    def forward(self, x):
-        out = self.pretrained(x)
-        return out, self.selected_out
+    def forward(self, images: Tensor, data: Tensor) -> Tensor:
+        x = self.resnet.conv1(images)
+        x = self.resnet.bn1(x)
+        x = self.resnet.relu(x)
+        x = self.resnet.maxpool(x)
+        x = self.resnet.layer1(x)
+        x = self.resnet.layer2(x)
+        x = self.resnet.layer3(x)
+        x = self.resnet.layer4(x)
+        # The spatial dimension of the final layer's feature
+        # map should be (7, 7) for all ResNets.
+        x = self.resnet.avgpool(x)
+        x = x.view(x.size(0), -1)  # feature vector
+        # append the clinical data features to the feature vector (convolutional output features)
+        comb = torch.cat((x, data), dim=1)
+        x = self.resnet.fc(comb)
+        return x
