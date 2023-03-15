@@ -10,7 +10,7 @@ Note: All data was deidentified but is not publicly available
 │   ├── Test Set Preds <- NT-proBNP predictions on test set using the best model (minimize MAE valid loss).<br>
 ├── 1 - Preprocessing.ipynb                               <- Cleaning the original x-rays + clinical data, excluding rows with missing data/no image available<br>
 ├── 2 - Transfer Learning Training & Evaluation.ipynb     <- Provided by UCSD AIDA Lab, shows how they trained the U-Net segmentation model. Did not use this for our project<br>
-├── 3 - Predicting Unannotated.ipynb                      <- Used the U-Net segmentation model from the UCSD AIDA Lab to create binary masks (lungs, heart, clavicles, spinal column) for   │									 	 each radiograph in our dataset. Saved the segmentations to an hdf5 file. <br>
+├── 3 - Predicting Unannotated.ipynb                      <- Used the U-Net segmentation model from the UCSD AIDA Lab to create binary masks (lungs, heart, clavicles, spinal column) for each radiograph in our dataset. Saved the segmentations to an hdf5 file. <br>
 ├── 4 - Creating Masks.ipynb                              <- Uses the binary masks created in '3 - Predicting Unannotated.ipynb' to produce the segmentation inputs for our model <br>
 ├── 5 - CNN Models.ipynb                                  <- Contains all code for training and testing models. <br>
 ├── model.py           <- Contains modified ResNet152 architectures, extends the Pytorch ResNet152 implementation <br>
