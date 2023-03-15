@@ -3,8 +3,8 @@ Project <br>
 ├── run.py             <- run.py with calls to functions in src.<br>
 ├── README.md          <- The top-level README for developers using this project.<br>
 ├── data<br>
-│   ├── temp           <- Intermediate data that has been transformed.<br>
-│   ├── out            <- The final, canonical data sets for modeling.<br>
+   ├── temp           <- Intermediate data that has been transformed.<br>
+   ├── out            <- The final, canonical data sets for modeling.<br>
 ├── notebooks          <- Jupyter notebooks (presentation only).<br>
 ├── references         <- Data dictionaries, explanatory materials.<br>
 ├── src                <- Source code for use in this project.<br>
@@ -17,3 +17,13 @@ Project <br>
 &nbsp;&nbsp;&nbsp;&nbsp;    │   └── train_model.py<br>
 &nbsp;&nbsp;&nbsp;&nbsp;    └── visualization  <- Scripts to create exploratory and results-oriented viz.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;        └── visualize.py<br>
+├── 1 - Preprocessing.ipynb            
+├── 2 - Predicting Unannotated.ipynb           
+├── 2 - Transfer Learning Training & Evaluation.ipynb        
+├── 3 - Checking Data.ipynb    
+├── 4 - Checking Data.ipynb
+├── 4 - Creating Masks.ipynb
+├── 5 - CNN Models.ipynb
+├── 5 - Creating Masks.ipynb
+├── 6 - CNN Models.ipynb
+├── CXR_model.json
