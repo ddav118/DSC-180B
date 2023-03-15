@@ -19,3 +19,4 @@ Note: All data was deidentified but is not publicly available
 ├── train.py           <- Contains model training and testing functions; different inputs called for different architectures<br>
 
 
+Acknowledgements: Thank you to our incredible mentor Albert Hsiao, MD, PhD for his guidance, and Amin Mahmoodi for providing the U-Net segmentation network.
